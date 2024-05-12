@@ -1,0 +1,28 @@
+{
+  "name": "google-spreadsheet-api",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "expo": "51.0.0",
+    "expo-background-fetch": "~12.0.1",
+    "expo-constants": "~15.4.6",
+    "expo-device": "~5.9.4",
+    "expo-notifications": "~0.27.7",
+    "expo-status-bar": "~1.11.1",
+    "react": "18.2.0",
+    "react-native": "0.73.6",
+    "react-native-paper": "^5.12.3",
+    "react-native-push-notification": "^8.1.1",
+    "react-native-sound": "^0.11.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0"
+  },
+  "private": true
+}
