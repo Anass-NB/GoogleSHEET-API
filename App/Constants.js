@@ -1,0 +1,1 @@
+export const FREQUENCY_SECONDS = 10;

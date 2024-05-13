@@ -1,19 +1,19 @@
-import React, { useEffect, useState, useRef } from "react";
-import {
-  StyleSheet,
-  Text,
-  Button,
-  View,
-  ScrollView,
-  Platform,
-  ActivityIndicator,
-  Alert,
-} from "react-native";
-import { Card } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text
+} from "react-native";
+import { Card } from "react-native-paper";
+import { FREQUENCY_SECONDS } from "./Constants";
 import FetchData from "./FetchData";
+import { FetchDataBackground } from "./Tasks";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -134,7 +134,7 @@ export default function Data() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setSecondsElapsed((prevSecondsElapsed) => prevSecondsElapsed + 1);
-      if (secondsElapsed % 10 === 0) {
+      if (secondsElapsed % FREQUENCY_SECONDS === 0) {
         // Every 10 seconds
         fetchData();
       }
@@ -142,6 +142,13 @@ export default function Data() {
 
     return () => clearInterval(intervalId);
   }, [secondsElapsed]);
+
+  
+  useEffect(() => {
+    (async ()=>{
+      await FetchDataBackground(fetchData)
+    })()
+  }, []);
 
   const fetchData = async () => {
     try {
