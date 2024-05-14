@@ -107,24 +107,31 @@ export default function Data() {
     try {
       console.log("Sending push notification...");
       // notification message
-      const message = {
-        to: expoPushToken,
-        sound: "default",
-        title: "Nouvelle commande dans Tan.ma! 🎉",
-        body: "Ouvrir l'application pour voir la nouvelle commande! 🚀",
-      };
+      // const message = {
+      //   to: expoPushToken,
+      //   sound: "default",
+      //   title: "Nouvelle commande dans Tan.ma! 🎉",
+      //   body: "Ouvrir l'application pour voir la nouvelle commande! 🚀",
+      // };
+      // const result = await fetch("https://exp.host/--/api/v2/push/send", {
+      //   method: "POST",
+      //   headers: {
+      //     host: "exp.host",
+      //     accept: "application/json",
+      //     "accept-encoding": "gzip, deflate",
+      //     "content-type": "application/json",
+      //   },
+      //   body: JSON.stringify(message),
+      // });
 
-      await fetch("https://exp.host/--/api/v2/push/send", {
-        method: "POST",
-        headers: {
-          host: "exp.host",
-          accept: "application/json",
-          "accept-encoding": "gzip, deflate",
-          "content-type": "application/json",
+      Notifications.scheduleNotificationAsync({
+        content: {
+          title: "Nouvelle commande dans Tan.ma! 🎉",
+          body: "Ouvrir l'application pour voir la nouvelle commande! 🚀",
         },
-        body: JSON.stringify(message),
+        trigger: null
       });
-      console.log("Notification sent successfully!");
+      
     } catch (error) {
       console.error("Error sending notification:", error);
       Alert.alert("Error", "Failed to send notification");
