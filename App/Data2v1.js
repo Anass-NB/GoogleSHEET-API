@@ -13,7 +13,8 @@ import {
 import { Card } from "react-native-paper";
 import { FREQUENCY_SECONDS } from "./Constants";
 import FetchData from "./FetchData";
-import { FetchDataBackground } from "./Tasks";
+import { fetchBackground } from "./Tasks";
+// import { FetchDataBackground } from "./Tasks";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -153,7 +154,7 @@ export default function Data() {
   
   useEffect(() => {
     (async ()=>{
-      await FetchDataBackground(fetchData)
+      await fetchBackground(fetchData)
     })()
   }, []);
 
@@ -185,9 +186,9 @@ export default function Data() {
     }
   };
 
-  useEffect(() => {
-    fetchData(); // Initial fetch
-  }, []);
+  // useEffect(() => {
+  //   fetchData(); // Initial fetch
+  // }, []);
 
   const sortedValue = [...value].sort((a, b) => b[0] - a[0]);
 
