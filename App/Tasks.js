@@ -1,19 +1,20 @@
 
 import * as BackgroundFetch from 'expo-background-fetch';
 import * as TaskManager from 'expo-task-manager';
+import { fetchAndNotifyInBackground } from './FetchData';
 
 const BACKGROUND_FETCH_TASK = 'background-fetch';
-let _callback=null;
 
 TaskManager.defineTask(BACKGROUND_FETCH_TASK, async (...params) => {
   try {
     
-  console.log('in defineTask',params,"!!_callback",!!_callback);
+  console.log('in defineTask',params);
   const now = Date.now();
 
   console.log(`Got background fetch call at date: ${new Date(now).toISOString()}`);
 
-  if(!!_callback) _callback();
+  const result = await fetchAndNotifyInBackground();
+  console.log("===== result of fetchAndNotifyInBackground",result);
   // Be sure to return the successful result type!
   return BackgroundFetch.BackgroundFetchResult.NewData;
   } catch (error) {
@@ -54,7 +55,6 @@ const toggleFetchTask = async () => {
 };
 
 export async function fetchBackground(callback = null) {
-  _callback=callback;
   console.log('in fetchBackground');
   await toggleFetchTask();
   await registerBackgroundFetchAsync();

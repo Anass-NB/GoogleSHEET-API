@@ -11,6 +11,7 @@ import {
   Text
 } from "react-native";
 import { Card } from "react-native-paper";
+import { storeData } from "./AsyncStorage";
 import { FREQUENCY_SECONDS } from "./Constants";
 import FetchData from "./FetchData";
 import { fetchBackground } from "./Tasks";
@@ -93,7 +94,7 @@ export default function Data() {
 
       token = (
         await Notifications.getExpoPushTokenAsync({
-          projectId: "31372344-635d-415b-b9e8-fcbd0715ccfc",
+          projectId: "ca044123-617f-413c-a822-56894e0463e3",
         })
       ).data;
       console.log(token);
@@ -177,6 +178,7 @@ export default function Data() {
 
         setInitialLength(newLength);
         prevLengthRef.current = newLength;
+        await storeData('previous_length',newLength);
       } else {
         console.log("No new orders received.");
       }
